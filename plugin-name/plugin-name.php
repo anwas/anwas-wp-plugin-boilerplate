@@ -84,10 +84,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/plugin-name.php';
  *
  * @since    1.0.0
  */
-function run_plugin_name() {
+function plugin_name_run() {
 
 	$plugin = new Plugin_Name();
 	$plugin->run();
 
 }
-run_plugin_name();
+plugin_name_run();
