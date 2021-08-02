@@ -82,7 +82,7 @@ class Plugin_Name_Shortcodes {
 	 *
 	 * @return string
 	 */
-	public function plugin_name_shortcode_func( string|array $atts, ?string $content = null, string $tag ): string { // phpcs:ignore Generic.PHP.Syntax.PHPSyntax
+	public function shortcode_func( string|array $atts, ?string $content = null, string $tag ): string { // phpcs:ignore Generic.PHP.Syntax.PHPSyntax
 
 		$a = shortcode_atts(
 			array(

@@ -67,25 +67,26 @@ class Plugin_Name {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
+		if ( defined( '\Plugin_Name\PLUGIN_NAME_VERSION' ) ) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'plugin-name';
 
-		if ( defined( 'PLUGIN_NAME_PREFIX' ) ) {
+		if ( defined( '\Plugin_Name\PLUGIN_NAME_PREFIX' ) ) {
 			$this->plugin_prefix = PLUGIN_NAME_PREFIX;
 		} else {
 			$this->plugin_prefix = 'plugin_name_prefix';
 		}
 
+		// Manualy load only if not using autoloader.
 		$this->load_dependencies();
 
 	}
 
 	/**
-	 * Load the required dependencies for this plugin.
+	 * Load the required dependencies for this plugin only if not using autoloader.
 	 *
 	 * Include the following files that make up the plugin:
 	 *
@@ -190,7 +191,7 @@ class Plugin_Name {
 
 		$plugin_shortcodes = new \Plugin_Name\Public_Area\Plugin_Name_Shortcodes( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
 
-		add_shortcode( $this->get_plugin_prefix() . 'shortcode', array( $plugin_shortcodes, 'plugin_name_shortcode_func' ) );
+		add_shortcode( $this->get_plugin_prefix() . 'shortcode', array( $plugin_shortcodes, 'shortcode_func' ) );
 
 	}
 
