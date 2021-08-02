@@ -45,7 +45,7 @@ if ( ! defined( '\Plugin_Name\PLUGIN_NAME_VERSION' ) ) {
  * Rename this for your own.
  */
 if ( ! defined( '\Plugin_Name\PLUGIN_NAME_PREFIX' ) ) {
-	define( 'Plugin_Name\PLUGIN_NAME_PREFIX', 'plugin_name_prefix' );
+	define( 'Plugin_Name\PLUGIN_NAME_PREFIX', 'plugin_name' );
 }
 
 /**

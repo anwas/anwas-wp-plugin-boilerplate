@@ -89,7 +89,7 @@ class Plugin_Name_Shortcodes {
 				'attribute' => '0',
 			),
 			$atts,
-			$this->plugin_prefix . 'shortcode'
+			$this->plugin_prefix . '_shortcode'
 		);
 
 		// If the shortcode produces a lot of HTML then ob_start can be used to capture output and convert it to a string.

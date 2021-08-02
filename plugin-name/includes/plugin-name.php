@@ -77,7 +77,7 @@ class Plugin_Name {
 		if ( defined( '\Plugin_Name\PLUGIN_NAME_PREFIX' ) ) {
 			$this->plugin_prefix = PLUGIN_NAME_PREFIX;
 		} else {
-			$this->plugin_prefix = 'plugin_name_prefix';
+			$this->plugin_prefix = 'plugin_name';
 		}
 
 		// Manualy load only if not using autoloader.
@@ -191,7 +191,7 @@ class Plugin_Name {
 
 		$plugin_shortcodes = new \Plugin_Name\Public_Area\Plugin_Name_Shortcodes( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
 
-		add_shortcode( $this->get_plugin_prefix() . 'shortcode', array( $plugin_shortcodes, 'shortcode_func' ) );
+		add_shortcode( $this->get_plugin_prefix() . '_shortcode', array( $plugin_shortcodes, 'shortcode_func' ) );
 
 	}
 
