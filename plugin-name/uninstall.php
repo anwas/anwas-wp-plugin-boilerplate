@@ -24,7 +24,38 @@
  * @package    Plugin_Name
  */
 
-// If uninstall not called from WordPress, then exit.
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
+$plugin_name_prefix = 'plugin_name';
+$required_cap       = $plugin_name_prefix . '_plugin_manage';
+
+// If uninstall not called from WordPress,
+// if no uninstall action,
+// if not this plugin,
+// if no caps,
+// then exit.
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' )
+        || empty( $_REQUEST )
+        || ! isset( $_REQUEST['plugin'] )
+        || ! isset( $_REQUEST['action'] )
+        || 'plugin-name/plugin-name.php' !== $_REQUEST['plugin']
+        || 'delete-plugin' !== $_REQUEST['action']
+        || ! check_ajax_referer( 'updates', '_ajax_nonce' )
+        || ! current_user_can( 'activate_plugins' )
+        || ! current_user_can( $required_cap )
+) {
+    wp_die( esc_html__( 'Action denied.', 'plugin-name' ) );
+    exit;
+}
+
+// delete_option( $plugin_name_prefix . '_plugin_options' ); // If set, remove saved options from the database.
+
+$admin_role = get_role( 'administrator' );
+
+if ( ! empty( $admin_role ) ) {
+    $admin_role->remove_cap( $required_cap );
+}
+
+$editor_role = get_role( 'editor' );
+
+if ( ! empty( $editor_role ) ) {
+    $editor_role->remove_cap( $required_cap );
 }
