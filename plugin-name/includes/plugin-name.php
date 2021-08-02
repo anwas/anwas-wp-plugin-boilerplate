@@ -104,23 +104,23 @@ class Plugin_Name {
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/plugin-name-i18n.php';
+		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'includes/plugin-name-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin-area/plugin-name-admin.php';
+		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'admin-area/plugin-name-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-public.php';
+		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'public-area/plugin-name-public.php';
 
 		/**
 		 * The class responsible for defining all registration and functionality of the shortcodes.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-shortcodes.php';
+		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'public-area/plugin-name-shortcodes.php';
 
 	}
 

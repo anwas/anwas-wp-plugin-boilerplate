@@ -49,11 +49,25 @@ if ( ! defined( '\Plugin_Name\PLUGIN_NAME_PREFIX' ) ) {
 }
 
 /**
+ * The DIR PATH of this plugin with trailing slash.
+ */
+if ( ! defined( '\Plugin_Name\PLUGIN_NAME_DIR' ) ) {
+    define( 'Plugin_Name\PLUGIN_NAME_DIR', plugin_dir_path( __FILE__ ) );
+}
+
+/**
+ * The URL of this plugin with trailing slash.
+ */
+if ( ! defined( '\Plugin_Name\PLUGIN_NAME_URI' ) ) {
+    define( 'Plugin_Name\PLUGIN_NAME_URI', plugin_dir_url( __FILE__ ) );
+}
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/plugin-name-activator.php
  */
 function plugin_name_activate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-name-activator.php';
+	require_once \Plugin_Name\PLUGIN_NAME_DIR . 'includes/plugin-name-activator.php';
 	\Plugin_Name\Plugin_Name_Activator::activate();
 }
 
@@ -62,7 +76,7 @@ function plugin_name_activate() {
  * This action is documented in includes/plugin-name-deactivator.php
  */
 function plugin_name_deactivate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-name-deactivator.php';
+	require_once \Plugin_Name\PLUGIN_NAME_DIR. 'includes/plugin-name-deactivator.php';
 	\Plugin_Name\Plugin_Name_Deactivator::deactivate();
 }
 
@@ -73,7 +87,7 @@ register_deactivation_hook( __FILE__, '\Plugin_Name\plugin_name_deactivate' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/plugin-name.php';
+require \Plugin_Name\PLUGIN_NAME_DIR . 'includes/plugin-name.php';
 
 /**
  * Begins execution of the plugin.
