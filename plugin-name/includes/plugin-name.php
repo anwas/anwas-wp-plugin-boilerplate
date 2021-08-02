@@ -92,6 +92,7 @@ class Plugin_Name {
 	 * - \Plugin_Name\Plugin_Name_i18n. Defines internationalization functionality.
 	 * - \Plugin_Name\Admin_Area\Plugin_Name_Admin. Defines all hooks for the admin area.
 	 * - \Plugin_Name\Public_Area\Plugin_Name_Public. Defines all hooks for the public side of the site.
+	 * - \Plugin_Name\Public_Area\Plugin_Name_Shortcodes. Defines all hooks for the registration of the shortcodes.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -114,6 +115,12 @@ class Plugin_Name {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-public.php';
+
+		/**
+		 * The class responsible for defining all registration and functionality of the shortcodes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-shortcodes.php';
+
 	}
 
 	/**
