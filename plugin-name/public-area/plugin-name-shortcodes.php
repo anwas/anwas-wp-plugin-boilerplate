@@ -95,6 +95,10 @@ class Plugin_Name_Shortcodes {
 		// If the shortcode produces a lot of HTML then ob_start can be used to capture output and convert it to a string.
 		ob_start();
 
+		if ( is_null( $content ) ) {
+			$content = '';
+		}
+
 		// Echo our output.
 		echo esc_html( $a['attribute'] ) . "\n" . do_shortcode( wp_kses_post( apply_filters( 'the_content', $content ) ) );
 

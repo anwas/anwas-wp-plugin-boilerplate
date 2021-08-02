@@ -89,9 +89,10 @@ class Plugin_Name {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Plugin_Name_i18n. Defines internationalization functionality.
-	 * - Plugin_Name_Admin. Defines all hooks for the admin area.
-	 * - Plugin_Name_Public. Defines all hooks for the public side of the site.
+	 * - \Plugin_Name\Plugin_Name_i18n. Defines internationalization functionality.
+	 * - \Plugin_Name\Admin_Area\Plugin_Name_Admin. Defines all hooks for the admin area.
+	 * - \Plugin_Name\Public_Area\Plugin_Name_Public. Defines all hooks for the public side of the site.
+	 * - \Plugin_Name\Public_Area\Plugin_Name_Shortcodes. Defines all hooks for the registration of the shortcodes.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -115,6 +116,11 @@ class Plugin_Name {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-public.php';
 
+		/**
+		 * The class responsible for defining all registration and functionality of the shortcodes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-shortcodes.php';
+
 	}
 
 	/**
@@ -128,7 +134,7 @@ class Plugin_Name {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Plugin_Name_i18n();
+		$plugin_i18n = new \Plugin_Name\Plugin_Name_i18n();
 
 		add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
 
@@ -143,7 +149,7 @@ class Plugin_Name {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Plugin_Name\Admin_Area\Plugin_Name_Admin( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new \Plugin_Name\Admin_Area\Plugin_Name_Admin( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
 
 		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_scripts' ) );
@@ -159,7 +165,7 @@ class Plugin_Name {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Plugin_Name\Public_Area\Plugin_Name_Public( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new \Plugin_Name\Public_Area\Plugin_Name_Public( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
 
 		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'enqueue_scripts' ) );
@@ -182,7 +188,7 @@ class Plugin_Name {
 	 */
 	public function add_shortcodes() {
 
-		$plugin_shortcodes = new Plugin_Name\Public_Area\Plugin_Name_Shortcodes( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_shortcodes = new \Plugin_Name\Public_Area\Plugin_Name_Shortcodes( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
 
 		add_shortcode( $this->get_plugin_prefix() . 'shortcode', array( $plugin_shortcodes, 'plugin_name_shortcode_func' ) );
 
