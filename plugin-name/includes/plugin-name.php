@@ -89,9 +89,9 @@ class Plugin_Name {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Plugin_Name_i18n. Defines internationalization functionality.
-	 * - Plugin_Name_Admin. Defines all hooks for the admin area.
-	 * - Plugin_Name_Public. Defines all hooks for the public side of the site.
+	 * - \Plugin_Name\Plugin_Name_i18n. Defines internationalization functionality.
+	 * - \Plugin_Name\Admin_Area\Plugin_Name_Admin. Defines all hooks for the admin area.
+	 * - \Plugin_Name\Public_Area\Plugin_Name_Public. Defines all hooks for the public side of the site.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -114,7 +114,6 @@ class Plugin_Name {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public-area/plugin-name-public.php';
-
 	}
 
 	/**
