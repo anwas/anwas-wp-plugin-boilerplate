@@ -43,7 +43,6 @@ class Plugin_Name_Activator {
 
         $editor_role = get_role( 'editor' );
 
-
         if ( ! empty( $editor_role ) ) {
             $editor_role->add_cap( \Plugin_Name\PLUGIN_NAME_PREFIX . '_plugin_manage' );
         }

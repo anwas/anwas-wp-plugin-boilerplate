@@ -32,7 +32,7 @@ class Plugin_Name_Deactivator {
 	 */
 	public static function deactivate() {
         // Deactivation is NOT uninstall!
-        if ( ! current_user_can( 'activate_plugins' ) ) {
+        if ( ! current_user_can( 'activate_plugins' ) || ! current_user_can( \Plugin_Name\PLUGIN_NAME_PREFIX . '_plugin_manage' ) ) {
             return;
         }
 
