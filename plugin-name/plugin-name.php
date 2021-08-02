@@ -36,16 +36,16 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-if ( ! defined( 'PLUGIN_NAME_VERSION' ) ) {
-	define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+if ( ! defined( '\Plugin_Name\PLUGIN_NAME_VERSION' ) ) {
+	define( 'Plugin_Name\PLUGIN_NAME_VERSION', '1.0.0' );
 }
 
 /**
  * The unique prefix of this plugin.
  * Rename this for your own.
  */
-if ( ! defined( 'PLUGIN_NAME_PREFIX' ) ) {
-	define( 'PLUGIN_NAME_PREFIX', 'plugin_name_prefix' );
+if ( ! defined( '\Plugin_Name\PLUGIN_NAME_PREFIX' ) ) {
+	define( 'Plugin_Name\PLUGIN_NAME_PREFIX', 'plugin_name_prefix' );
 }
 
 /**
@@ -54,7 +54,7 @@ if ( ! defined( 'PLUGIN_NAME_PREFIX' ) ) {
  */
 function plugin_name_activate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-name-activator.php';
-	Plugin_Name_Activator::activate();
+	\Plugin_Name\Plugin_Name_Activator::activate();
 }
 
 /**
@@ -63,11 +63,11 @@ function plugin_name_activate() {
  */
 function plugin_name_deactivate() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-name-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+	\Plugin_Name\Plugin_Name_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'plugin_name_activate' );
-register_deactivation_hook( __FILE__, 'plugin_name_deactivate' );
+register_activation_hook( __FILE__, '\Plugin_Name\plugin_name_activate' );
+register_deactivation_hook( __FILE__, '\Plugin_Name\plugin_name_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -86,7 +86,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/plugin-name.php';
  */
 function plugin_name_run() {
 
-	$plugin = new Plugin_Name();
+	$plugin = new \Plugin_Name\Plugin_Name();
 	$plugin->run();
 
 }
