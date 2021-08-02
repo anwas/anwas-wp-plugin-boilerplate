@@ -31,6 +31,10 @@ class Plugin_Name_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
+        // Deactivation is NOT uninstall!
+        if ( ! current_user_can( 'activate_plugins' ) ) {
+            return;
+        }
 
 	}
 

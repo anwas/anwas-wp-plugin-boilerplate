@@ -31,6 +31,23 @@ class Plugin_Name_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+        if ( ! current_user_can( 'activate_plugins' ) ) {
+            return;
+        }
+
+        $admin_role = get_role( 'administrator' );
+
+        if ( ! empty( $admin_role ) ) {
+            $admin_role->add_cap( \Plugin_Name\PLUGIN_NAME_PREFIX . '_plugin_manage' );
+        }
+
+        $editor_role = get_role( 'editor' );
+
+
+        if ( ! empty( $editor_role ) ) {
+            $editor_role->add_cap( \Plugin_Name\PLUGIN_NAME_PREFIX . '_plugin_manage' );
+        }
+        flush_rewrite_rules();
 
 	}
 
