@@ -11,6 +11,11 @@
 
 namespace Plugin_Name\Admin_Area;
 
+use const \Plugin_Name\PLUGIN_DIR;
+use const \Plugin_Name\PLUGIN_URI;
+
+use \Plugin_Name\Plugin_Name; // The main class of the plugin.
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -56,13 +61,12 @@ class Plugin_Name_Admin {
 	 * @since    1.0.0
 	 * @param      string $plugin_prefix     The unique prefix of this plugin.
 	 * @param      string $plugin_name       The name of this plugin.
-	 * @param      string $version           The version of this plugin.
 	 */
-	public function __construct( string $plugin_prefix, string $plugin_name, string $version ) {
+	public function __construct( string $plugin_prefix, string $plugin_name ) {
 
 		$this->plugin_prefix = $plugin_prefix;
 		$this->plugin_name   = $plugin_name;
-		$this->version       = $version;
+		$this->version       = Plugin_Name::get_version();
 
 	}
 
@@ -92,7 +96,13 @@ class Plugin_Name_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/css/plugin-name-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style(
+			$this->plugin_name,
+			PLUGIN_URI . 'admin-area/assets/css/plugin-name-admin.css',
+			array(),
+			Plugin_Name::get_asset_version( PLUGIN_DIR . 'admin-area/assets/css/plugin-name-admin.css' ),
+			'all'
+		);
 
 	}
 
@@ -122,7 +132,13 @@ class Plugin_Name_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/js/plugin-name-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script(
+			$this->plugin_name,
+			PLUGIN_URI . 'admin-area/assets/js/plugin-name-admin.js',
+			array( 'jquery' ),
+			Plugin_Name::get_asset_version( PLUGIN_DIR . 'admin-area/assets/js/plugin-name-admin.js' ),
+			true
+		);
 
 	}
 

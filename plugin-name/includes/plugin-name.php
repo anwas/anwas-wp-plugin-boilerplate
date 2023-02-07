@@ -14,6 +14,8 @@
 
 namespace Plugin_Name;
 
+use \Plugin_Name\PLUGIN_DIR;
+
 /**
  * The core plugin class.
  *
@@ -55,7 +57,7 @@ class Plugin_Name {
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
-	protected string $version;
+	private static string $version;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -67,15 +69,13 @@ class Plugin_Name {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( '\Plugin_Name\PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
-		} else {
-			$this->version = '1.0.0';
-		}
+		
+		self::$version = self::get_version();
+
 		$this->plugin_name = 'plugin-name';
 
-		if ( defined( '\Plugin_Name\PLUGIN_NAME_PREFIX' ) ) {
-			$this->plugin_prefix = PLUGIN_NAME_PREFIX;
+		if ( defined( '\Plugin_Name\PLUGIN_PREFIX' ) ) {
+			$this->plugin_prefix = \Plugin_Name\PLUGIN_PREFIX;
 		} else {
 			$this->plugin_prefix = 'plugin_name';
 		}
@@ -104,23 +104,23 @@ class Plugin_Name {
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'includes/plugin-name-i18n.php';
+		require_once PLUGIN_DIR . 'includes/plugin-name-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'admin-area/plugin-name-admin.php';
+		require_once PLUGIN_DIR . 'admin-area/plugin-name-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'public-area/plugin-name-public.php';
+		require_once PLUGIN_DIR . 'public-area/plugin-name-public.php';
 
 		/**
 		 * The class responsible for defining all registration and functionality of the shortcodes.
 		 */
-		require_once \Plugin_Name\PLUGIN_NAME_DIR . 'public-area/plugin-name-shortcodes.php';
+		require_once PLUGIN_DIR . 'public-area/plugin-name-shortcodes.php';
 
 	}
 
@@ -150,7 +150,7 @@ class Plugin_Name {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new \Plugin_Name\Admin_Area\Plugin_Name_Admin( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new \Plugin_Name\Admin_Area\Plugin_Name_Admin( $this->get_plugin_prefix(), $this->get_plugin_name() );
 
 		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $plugin_admin, 'enqueue_scripts' ) );
@@ -166,7 +166,7 @@ class Plugin_Name {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new \Plugin_Name\Public_Area\Plugin_Name_Public( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new \Plugin_Name\Public_Area\Plugin_Name_Public( $this->get_plugin_prefix(), $this->get_plugin_name() );
 
 		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $plugin_public, 'enqueue_scripts' ) );
@@ -189,7 +189,7 @@ class Plugin_Name {
 	 */
 	public function add_shortcodes() {
 
-		$plugin_shortcodes = new \Plugin_Name\Public_Area\Plugin_Name_Shortcodes( $this->get_plugin_prefix(), $this->get_plugin_name(), $this->get_version() );
+		$plugin_shortcodes = new \Plugin_Name\Public_Area\Plugin_Name_Shortcodes( $this->get_plugin_prefix(), $this->get_plugin_name() );
 
 		add_shortcode( $this->get_plugin_prefix() . '_shortcode', array( $plugin_shortcodes, 'shortcode_func' ) );
 
@@ -228,13 +228,50 @@ class Plugin_Name {
 	}
 
 	/**
+	 * Get the version number of the asset file.
+	 *
+	 * @param string $full_path Visas kelias iki failo.
+	 *
+	 * @since     1.0.0
+	 * @return    string    Full path to the asset file.
+	 */
+	public static function get_asset_version( string $full_path ): string {
+		if ( ! defined( '\WP_DEBUG' ) || false === \WP_DEBUG ) {
+			return self::get_version();
+		}
+
+		if ( ! \file_exists( $full_path ) ) {
+			return '';
+		}
+
+		return \filemtime( $full_path );
+	}
+
+	/**
 	 * Retrieve the version number of the plugin.
 	 *
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
-		return $this->version;
+	public static function get_version(): string {
+		if ( ! isset( self::$version ) || empty( self::$version ) ) {
+			self::set_version();
+		}
+
+		return self::$version;
+	}
+
+	/**
+	 *  Set the version number of the plugin.
+	 *
+	 * @since     1.0.0
+	 */
+	private static function set_version() {
+		if ( defined( '\Plugin_Name\PLUGIN_VERSION' ) ) {
+			self::$version = \Plugin_Name\PLUGIN_VERSION;
+		} else {
+			self::$version = '1.0.0';
+		}
 	}
 
 }

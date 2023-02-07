@@ -29,7 +29,6 @@ namespace Plugin_Name;
  */
 class Plugin_Name_i18n {
 
-
 	/**
 	 * Load the plugin text domain for translation.
 	 *
@@ -44,7 +43,5 @@ class Plugin_Name_i18n {
 		);
 
 	}
-
-
 
 }

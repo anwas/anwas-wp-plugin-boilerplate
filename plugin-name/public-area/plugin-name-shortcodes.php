@@ -11,6 +11,8 @@
 
 namespace Plugin_Name\Public_Area;
 
+use \Plugin_Name\Plugin_Name; // The main class of the plugin.
+
 /**
  * The shortcodes functionality of the plugin.
  *
@@ -56,20 +58,19 @@ class Plugin_Name_Shortcodes {
 	 * @since    1.0.0
 	 * @param      string $plugin_prefix     The unique prefix of this plugin.
 	 * @param      string $plugin_name       The name of the plugin.
-	 * @param      string $version           The version of this plugin.
 	 */
-	public function __construct( string $plugin_prefix, string $plugin_name, string $version ) {
+	public function __construct( string $plugin_prefix, string $plugin_name ) {
 
 		$this->plugin_prefix = $plugin_prefix;
 		$this->plugin_name   = $plugin_name;
-		$this->version       = $version;
+		$this->version       = Plugin_Name::get_version();
 
 	}
 
 	/**
 	 * Example Shortcode processing function.
 	 *
-	 * Shortcode can take attributes like [plugin_name_prefix_shortcode attribute='123'] .
+	 * Shortcode can take attributes like [PLUGIN_PREFIX_shortcode attribute='123'] .
 	 * Shortcode attribute names are always converted to lowercase
 	 * before they are passed into the handler function. Values are untouched.
 	 *
