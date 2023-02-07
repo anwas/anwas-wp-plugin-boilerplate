@@ -19,7 +19,7 @@ namespace Plugin_Name\Public_Area;
  *
  * @package    Plugin_Name
  * @subpackage Plugin_Name/public_area
- * @author     Your Name or Your Company <email@example.com>
+ * @author     Your Name <email@example.com>
  */
 class Plugin_Name_Shortcodes {
 
