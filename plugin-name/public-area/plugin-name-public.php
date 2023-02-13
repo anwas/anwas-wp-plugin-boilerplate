@@ -93,7 +93,7 @@ class Plugin_Name_Public {
 
 		wp_enqueue_style(
 			$this->plugin_name,
-			PLUGIN_DIR . 'public-area/assets/css/plugin-name-public.css',
+			PLUGIN_URI . 'public-area/assets/css/plugin-name-public.css',
 			array(),
 			Plugin_Name::get_asset_version( PLUGIN_DIR . 'public-area/assets/css/plugin-name-public.css' ),
 			'all'
@@ -124,7 +124,7 @@ class Plugin_Name_Public {
 
 		wp_enqueue_script(
 			$this->plugin_name,
-			PLUGIN_DIR . 'public-area/assets/js/plugin-name-public.js',
+			PLUGIN_URI . 'public-area/assets/js/plugin-name-public.js',
 			array( 'jquery' ),
 			Plugin_Name::get_asset_version( PLUGIN_DIR . 'public-area/assets/js/plugin-name-public.js' ),
 			true
