@@ -24,8 +24,8 @@
  * @package    Plugin_Name
  */
 
-$PLUGIN_PREFIX = 'plugin_name';
-$required_cap  = $PLUGIN_PREFIX . '_plugin_manage';
+$plugin_prefix = 'plugin_name';
+$required_cap  = $plugin_prefix . '_plugin_manage';
 
 // If uninstall not called from WordPress,
 // if no uninstall action,
@@ -46,7 +46,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' )
     exit;
 }
 
-// delete_option( $PLUGIN_PREFIX . '_plugin_options' ); // If set, remove saved options from the database.
+// delete_option( $plugin_prefix . '_plugin_options' ); // If set, remove saved options from the database.
 
 $admin_role = get_role( 'administrator' );
 
