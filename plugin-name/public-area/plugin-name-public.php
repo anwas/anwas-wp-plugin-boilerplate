@@ -79,16 +79,8 @@ class Plugin_Name_Public {
 	 */
 	public function enqueue_styles(): void {
 
-		/**
+		/*
 		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
 		 */
 
 		wp_enqueue_style(
@@ -110,22 +102,36 @@ class Plugin_Name_Public {
 	 */
 	public function enqueue_scripts(): void {
 
-		/**
+		/*
 		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
 		 */
+
+		wp_register_script(
+			$this->plugin_name . '-manifest',
+			PLUGIN_URI . 'public-area/assets/js/manifest.js',
+			array(),
+			Plugin_Name::get_asset_version( PLUGIN_DIR . 'public-area/assets/js/manifest.js' ),
+			true
+		);
+
+		wp_register_script(
+			$this->plugin_name . '-vendor',
+			PLUGIN_URI . 'public-area/assets/js/plugin-name-public-vendor.js',
+			array(
+				$this->plugin_name . '-manifest',
+			),
+			Plugin_Name::get_asset_version( PLUGIN_DIR . 'public-area/assets/js/plugin-name-public-vendor.js' ),
+			true
+		);
 
 		wp_enqueue_script(
 			$this->plugin_name,
 			PLUGIN_URI . 'public-area/assets/js/plugin-name-public.js',
-			array( 'jquery' ),
+			array(
+				$this->plugin_name . '-manifest',
+				$this->plugin_name . '-vendor',
+				'jquery',
+			),
 			Plugin_Name::get_asset_version( PLUGIN_DIR . 'public-area/assets/js/plugin-name-public.js' ),
 			true
 		);

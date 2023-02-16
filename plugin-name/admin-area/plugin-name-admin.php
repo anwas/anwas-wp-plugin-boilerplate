@@ -84,20 +84,12 @@ class Plugin_Name_Admin {
 	 */
 	public function enqueue_styles( string $hook_suffix ): void {
 
-		/**
+		/*
 		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
 		 */
 
 		wp_enqueue_style(
-			$this->plugin_name,
+			$this->plugin_name . '-admin',
 			PLUGIN_URI . 'admin-area/assets/css/plugin-name-admin.css',
 			array(),
 			Plugin_Name::get_asset_version( PLUGIN_DIR . 'admin-area/assets/css/plugin-name-admin.css' ),
@@ -120,22 +112,36 @@ class Plugin_Name_Admin {
 	 */
 	public function enqueue_scripts( string $hook_suffix ): void {
 
-		/**
+		/*
 		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
 		 */
 
+		wp_register_script(
+			$this->plugin_name . '-admin-manifest',
+			PLUGIN_URI . 'admin-area/assets/js/manifest.js',
+			array(),
+			Plugin_Name::get_asset_version( PLUGIN_DIR . 'admin-area/assets/js/manifest.js' ),
+			true
+		);
+
+		wp_register_script(
+			$this->plugin_name . '-admin-vendor',
+			PLUGIN_URI . 'admin-area/assets/js/plugin-name-admin-vendor.js',
+			array(
+				$this->plugin_name . '-admin-manifest',
+			),
+			Plugin_Name::get_asset_version( PLUGIN_DIR . 'admin-area/assets/js/plugin-name-admin-vendor.js' ),
+			true
+		);
+
 		wp_enqueue_script(
-			$this->plugin_name,
+			$this->plugin_name . '-admin',
 			PLUGIN_URI . 'admin-area/assets/js/plugin-name-admin.js',
-			array( 'jquery' ),
+			array(
+				$this->plugin_name . '-admin-manifest',
+				$this->plugin_name . '-admin-vendor',
+				'jquery',
+			),
 			Plugin_Name::get_asset_version( PLUGIN_DIR . 'admin-area/assets/js/plugin-name-admin.js' ),
 			true
 		);
